@@ -1,16 +1,17 @@
-import express from "express";
-import dotenv from "dotenv";
-dotenv.config();
-const { PORT } = process.env;
+//imports
+import db from "./config/db.config.js";
+import app from "./app.js";
 
-const app = express();
+const { PORT: port = 8000 } = process.env;
+
+// connect express app only if connected to db instance
+db.once("open", function () {
+  // Start the Express server
+ const expressServer =  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+});
+
 // use express router
 import appRoute from "./routes/app.routes.js";
 app.use("/", appRoute);
-
-const server = app.listen(PORT || 4000, (err) => {
-  if (err) {
-    console.log(`Error in running the server: ${err}`);
-  }
-  console.log(`Server is running on port: ${PORT}`);
-});
