@@ -12,6 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(cookieParser());
+app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Use express-ejs-layouts middleware
@@ -30,8 +31,5 @@ app.use(express.static(path.join(__dirname, "./public")));
 app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);
 
-// Define routes (importing the routes from routes/index.js)
-import appRoutes from "./routes/index.js";
-app.use("/", appRoutes);
-
+ 
 export default app;

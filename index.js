@@ -13,9 +13,5 @@ db.once("open", function () {
 });
 
 // use express router
-// import appRoute from "./routes/index.js";
-// app.use("/", appRoute);
-
-app.get("/", (req, res, next) => {
-  return res.render("index", { title: "Home" });
-});
+import appRoute from "./routes/index.js";
+app.use("/", appRoute);
