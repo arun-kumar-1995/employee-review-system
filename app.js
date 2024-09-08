@@ -14,16 +14,24 @@ const __dirname = path.dirname(__filename);
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Use express-ejs-layouts middleware
 app.use(expressLayouts);
-app.use(express.static(path.join(__dirname, "public")));
 
-// setting up view engine
-
+// Set EJS as the template engine
 app.set("view engine", "ejs");
-app.set("views", "./views");
+
+// Set the directory for views
+app.set("views", path.join(__dirname, "./views"));
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, "./public")));
 
 // serving static files
 app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);
+
+// Define routes (importing the routes from routes/index.js)
+import appRoutes from "./routes/index.js";
+app.use("/", appRoutes);
 
 export default app;
