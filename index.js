@@ -14,4 +14,13 @@ db.once("open", function () {
 
 // use express router
 import appRoute from "./routes/index.js";
+import ErrorHandler from "./middlewares/ErrorHandler.middleware.js";
 app.use("/", appRoute);
+
+// page not found
+app.all("*", (req, res, next) => {
+  return res.render(pageNotFound, { tile: "Page not found" });
+});
+
+//error middleware
+app.use(ErrorHandler);
