@@ -40,18 +40,18 @@ main {
 .heading {
   color: var(--clr-primary);
   font-weight: 600;
-  margin: var(--mg-04) 0 var(--mg-08);
 }
 
 /* Form Styling */
 .form {
   display: flex;
   flex-direction: column;
+  margin: var(--mg-1-6) 0;
 }
 
 /* Form Control Styling */
 .form-control {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--mg-1-6);
 }
 
 .form-control input {
@@ -91,45 +91,32 @@ button.login-button {
 }
 
 /* Sign Up Link Styling */
-div.signup-link {
+div.bottom-nav {
   margin-top: var(--mg-2);
 }
 
-div.signup-link h5 {
+div.bottom-nav h5 {
   font-size: 1.1rem;
   color: #4b4b4b;
   font-weight: var(--font-wt-400);
 }
 
-div.signup-link #sign-up {
-  display:block;  
+div.bottom-nav .link {
+  display: block;
   font-size: 1.2rem;
   padding: var(--pd-08);
   color: var(--clr-primary);
 }
 
-/* .signup-button {
+.a-button {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  border-radius: 50px; 
+  border-radius: 50px;
   background-color: transparent;
   color: var(--clr-primary);
-  outline: 2px solid var(--clr-primary);
-  text-decoration: none;
-  font-size: 1rem;
   transition: all 0.3s ease;
-} */
+}
 
-/* .signup-button:hover {
-  background-color: #007bff;
-  color: #fff;
-  box-shadow: 0 8px 16px rgba(0, 123, 255, 0.3); /* Add shadow on hover */
-/* } */
-
-/* Extra Responsiveness for Smaller Screens */
-@media (max-width: 768px) {
-  .main-container {
-    padding: 1.5rem;
-    width: 90%;
-  }
+.a-button:hover {
+  text-decoration: underline;
 }
