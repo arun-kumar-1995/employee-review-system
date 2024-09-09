@@ -1,4 +1,5 @@
 import ApiResponse from "../helpers/ApiResponse.js";
+import CatchAsyncError from "../middlewares/CatchAsyncError.js";
 import getSignInToken from "../helpers/GetSignInToken.js";
 import User from "../models/user.models.js";
 
@@ -31,31 +32,27 @@ export const create = async (req, res, next) => {
   return new ApiResponse(res, true, 201, "User created");
 };
 
-export const createSession = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    // check for user existence
-    const user = await User.findOne({ email });
-    if (!user) return new ApiResponse(res, false, 404, "User not found");
+export const createSession = CatchAsyncError(async (req, res, next) => {
+  const { email, password } = req.body;
+  // check for user existence
+  const user = await User.findOne({ email });
+  if (!user) return new ApiResponse(res, false, 404, "User not found");
 
-    // if user match passowrd
-    const match = await user.matchPassword(password);
-    if (!match)
-      return new ApiResponse(res, false, 400, "Invalid email or password");
+  // if user match passowrd
+  const match = await user.matchPassword(password);
+  if (!match)
+    return new ApiResponse(res, false, 400, "Invalid email or password");
 
-    //get token
-    // const token = getSignInToken(user._id);
-    // create cookie
-    res.cookie("token", token, {
-      expires: new Date(
-        Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-      ), // 7 days
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Only send over HTTPS in production
-    });
+  //get token
+  // const token = getSignInToken(user._id);
+  // create cookie
+  res.cookie("token", token, {
+    expires: new Date(
+      Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ), // 7 days
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // Only send over HTTPS in production
+  });
 
-    return new ApiResponse(res, true, 200, "You are logged in", { token });
-  } catch (err) {
-    next(err);
-  }
-};
+  return new ApiResponse(res, true, 200, "You are logged in", { token });
+});

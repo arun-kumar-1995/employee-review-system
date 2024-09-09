@@ -30,7 +30,6 @@ const ErrorHandler = (err, req, res, next) => {
 
   // reference error
   if (err instanceof ReferenceError) {
-    console.log("ERROR------ ", err.message);
     statusCode = 400;
   }
   // sending the response
