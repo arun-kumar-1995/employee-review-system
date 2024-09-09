@@ -21,7 +21,9 @@ app.use("/", appRoute);
 
 // page not found
 app.all("*", (req, res, next) => {
-  return res.render(pageNotFound, { tile: "Page not found" });
+  return res.render("pageNotFound", {
+    title: "Review System | Page Not Found",
+  });
 });
 
 //error middleware

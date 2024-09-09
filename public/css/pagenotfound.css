@@ -1,0 +1,102 @@
+.main-container {
+  background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.container {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: var(--pd-3);
+  border-radius: var(--pd-1-6);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+h1 {
+  font-size: 8rem;
+  color: var(--clr-orange-red);
+  margin-bottom: 20px;
+  font-weight: var(--font-wt-800);
+  letter-spacing: 5px;
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  font-size: 1.4rem;
+  color: var(--clr-text-light);
+  margin-bottom: var(--mg-1-6);
+}
+
+a.home-button {
+  display: inline-block;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  color: var(--clr-white);
+  background-color: var(--clr-orange-red);
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+a.home-button:hover {
+  transform: scale(1.1);
+  background-color: var(--clr-orange-red-h);
+}
+
+.floating-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  animation: float 5s ease-in-out infinite;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.circle1 {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: 30%;
+  animation-duration: 8s;
+}
+
+.circle2 {
+  width: 150px;
+  height: 150px;
+  top: 70%;
+  left: 60%;
+  animation-duration: 10s;
+}
+
+.circle3 {
+  width: 100px;
+  height: 100px;
+  top: 40%;
+  left: 80%;
+  animation-duration: 12s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
