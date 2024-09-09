@@ -13,8 +13,10 @@ db.once("open", function () {
 });
 
 // use express router
-import appRoute from "./routes/index.js";
+import appRoute from "./routes/user.routes.js";
 import ErrorHandler from "./middlewares/ErrorHandler.middleware.js";
+import checkAuth from "./middlewares/Auth.js";
+app.use(checkAuth);
 app.use("/", appRoute);
 
 // page not found

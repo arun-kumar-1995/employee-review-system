@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import checkAuth from "../middlewares/Auth.js";
 
 import {
   create,
@@ -7,10 +8,11 @@ import {
   signUp,
   createSession,
 } from "../controllers/user.controller.js";
-router.route("/").get(signIn);
-router.route("/sign-up").get(signUp);
 
 router.route("/create").post(create);
 router.route("/create-session").post(createSession);
+
+router.route("/").get(signIn);
+router.route("/sign-up").get(signUp);
 
 export default router;

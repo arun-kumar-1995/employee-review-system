@@ -3,9 +3,19 @@ import CatchAsyncError from "../middlewares/CatchAsyncError.js";
 import getSignInToken from "../helpers/GetSignInToken.js";
 import User from "../models/user.models.js";
 
-export const signIn = async (req, res, next) => {
+export const signIn = CatchAsyncError(async (req, res, next) => {
+  console.log(req.isAuthenticated());
+  console.log(req.userRole);
+
+  if (req.isAuthenticated()) {
+    if (req.userRole === "admin") {
+      return res.redirect("/admin-dashboard");
+    }
+    // if user is not admin
+    return res.redirect(`employee-dashboard/${req.user.id}`);
+  }
   return res.render("signin", { title: "Review System | SignIn" });
-};
+});
 
 export const signUp = async (req, res, next) => {
   return res.render("signup", { title: "Review System | SignUp" });
@@ -44,15 +54,23 @@ export const createSession = CatchAsyncError(async (req, res, next) => {
     return new ApiResponse(res, false, 400, "Invalid email or password");
 
   //get token
-  // const token = getSignInToken(user._id);
-  // create cookie
-  res.cookie("token", token, {
+  const token = getSignInToken(user._id);
+
+  //cookie option
+  const cookie_options = {
     expires: new Date(
       Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-    ), // 7 days
+    ),
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // Only send over HTTPS in production
-  });
+    secure: process.env.NODE_ENV === "production",
+  };
+
+  // create cookie
+  res.cookie(
+    "_session",
+    JSON.stringify({ token, user: { role: user.role, id: user._id } }),
+    cookie_options
+  );
 
   return new ApiResponse(res, true, 200, "You are logged in", { token });
 });
