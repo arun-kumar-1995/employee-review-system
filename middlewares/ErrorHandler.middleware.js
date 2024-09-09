@@ -28,6 +28,11 @@ const ErrorHandler = (err, req, res, next) => {
     message = "Your token has expired. Please log in again.";
   }
 
+  // reference error
+  if (err instanceof ReferenceError) {
+    console.log("ERROR------ ", err.message);
+    statusCode = 400;
+  }
   // sending the response
   return res.status(statusCode).json({
     success: false,

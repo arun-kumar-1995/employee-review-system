@@ -4,7 +4,7 @@ class ApiResponse {
       this.status = status;
       this.statusCode = statusCode;
       this.message = message;
-      this.data = data;
+      if(status) this.data = data;
       this.response();  // Automatically call response when instantiated
     }
   
