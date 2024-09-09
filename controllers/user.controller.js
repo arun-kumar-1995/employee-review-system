@@ -18,6 +18,12 @@ export const signIn = CatchAsyncError(async (req, res, next) => {
 });
 
 export const signUp = async (req, res, next) => {
+  if (req.isAuthenticated()) {
+    if (req.user.role === 'admin') {
+      return res.redirect('/admin-dashboard');
+    }
+    return res.redirect(`employee-dashboard/${req.user.id}`);
+  }
   return res.render("signup", { title: "Review System | SignUp" });
 };
 
@@ -74,3 +80,15 @@ export const createSession = CatchAsyncError(async (req, res, next) => {
 
   return new ApiResponse(res, true, 200, "You are logged in", { token });
 });
+
+// Render add employee page
+export const addEmployee = (req, res) => {
+  if (req.isAuthenticated()) {
+    if (req.user.role === 'admin') {
+      return res.render('add_employee', {
+        title: 'Add Employee ',
+      });
+    }
+  }
+  return res.redirect('/');
+};
