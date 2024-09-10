@@ -6,4 +6,8 @@ export const adminDashboard = CatchAsyncError(async (req, res, next) => {
   });
 });
 
-export const employeeDashboard = CatchAsyncError(async (req, res, next) => {});
+export const employeeDashboard = CatchAsyncError(async (req, res, next) => {
+  return res.render("employeeDashboard", {
+    title: "Employee Dashboard",
+  });
+});
