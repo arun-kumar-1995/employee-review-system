@@ -20,7 +20,7 @@ router.route("/create-session").post(createSession);
 router.route("/").get(signIn);
 router.route("/sign-up").get(signUp);
 router.route("/admin-dashboard").get(adminDashboard);
-// router.route("/employee-dashboard/:id").get(employeeDashboard);
+router.route("/employee-dashboard/:id").get(employeeDashboard);
 router.route("/add-employee").get(addEmployee);
 
 export default router;
