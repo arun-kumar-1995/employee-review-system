@@ -1,0 +1,104 @@
+body {
+  background-color: #f0f4f8;
+}
+
+div.dashboard-container {
+  padding: 0 var(--pd-2);
+}
+
+div.dashboard-container .table-heading {
+  text-align: center;
+  padding: var(--mg-2) 0;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  font-weight: var(--font-wt-600);
+}
+
+table.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--mg-08);
+  background-color: #fff;
+}
+
+table.employee-table thead th {
+  border: none;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 1.35rem;
+}
+
+.employee-table th {
+  background-color: #3498db;
+  color: white;
+}
+
+.employee-table tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+.employee-table td {
+  color: #34495e;
+}
+
+.btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #2980b9;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.review-btn {
+  background-color: #f1c40f;
+  color: white;
+}
+
+.review-btn:hover {
+  background-color: #f39c12;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .employee-table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .employee-table td:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
