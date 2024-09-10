@@ -11,6 +11,9 @@
     <script defer src="/js/index.js" type="text/javascript"></script>
   </head>
   <body>
-    <main><%- body %></main>
+    <div id="app">
+      <%- include('./partials/_header'); %>
+      <main><%- body %></main>
+    </div>
   </body>
 </html>

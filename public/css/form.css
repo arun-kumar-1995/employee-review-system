@@ -1,32 +1,5 @@
-/* Body Styling */
-main {
-  background: linear-gradient(
-    135deg,
-    #74ebd5 0%,
-    #acb6e5 100%
-  ); /* Soft gradient background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  color: #333;
-}
-
-/* Main Container Styling */
-.main-container {
-  background-color: var(--clr-white);
-  border-radius: var(--pd-08);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  padding: var(--pd-2);
-  width: 100%;
-  max-width: var(--min-width);
-  margin: 0 auto;
-  text-align: center;
-  animation: fadeIn 1.2s ease-out; /* Simple fade-in animation */
-}
-
 /* Fade-In Animation */
-@keyframes fadeIn {
+@keyframes fadeMove {
   from {
     opacity: 0;
     transform: translateY(30px);
@@ -35,6 +8,40 @@ main {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#app {
+  background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Main Container Styling */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 91vh;
+}
+.form-container {
+  background-color: var(--clr-white);
+  border-radius: var(--pd-08);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  padding: var(--pd-2);
+  width: 100%;
+  max-width: var(--min-width);
+  margin: 0 auto;
+  text-align: center;
+  animation: fadeMove 1.2s ease-out;
 }
 
 .heading {
@@ -54,7 +61,8 @@ main {
   margin-bottom: var(--mg-1-6);
 }
 
-.form-control input {
+.form-control input,
+.form-control select {
   width: 100%;
   padding: var(--pd-08) var(--pd-1-6);
   outline: 1px solid var(--clr-gray);
@@ -65,7 +73,8 @@ main {
   text-indent: var(--pd-04);
 }
 
-.form-control input:focus {
+.form-control input:focus ,
+.form-control select:focus {
   border-color: var(--clr-primary);
   background-color: var(--clr-white);
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);

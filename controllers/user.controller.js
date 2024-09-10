@@ -19,8 +19,8 @@ export const signIn = CatchAsyncError(async (req, res, next) => {
 
 export const signUp = async (req, res, next) => {
   if (req.isAuthenticated()) {
-    if (req.user.role === 'admin') {
-      return res.redirect('/admin-dashboard');
+    if (req.user.role === "admin") {
+      return res.redirect("/admin-dashboard");
     }
     return res.redirect(`employee-dashboard/${req.user.id}`);
   }
@@ -84,11 +84,11 @@ export const createSession = CatchAsyncError(async (req, res, next) => {
 // Render add employee page
 export const addEmployee = (req, res) => {
   if (req.isAuthenticated()) {
-    if (req.user.role === 'admin') {
-      return res.render('add_employee', {
-        title: 'Add Employee ',
+    if (req.user.role === "admin") {
+      return res.render("addEmployee", {
+        title: "Add Employee ",
       });
     }
   }
-  return res.redirect('/');
+  return res.redirect("/");
 };

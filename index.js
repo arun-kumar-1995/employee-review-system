@@ -22,7 +22,7 @@ app.use("/", appRoute);
 // page not found
 app.all("*", (req, res, next) => {
   return res.render("pageNotFound", {
-    title: "Review System | Page Not Found",
+    title: "Page Not Found",
   });
 });
 
