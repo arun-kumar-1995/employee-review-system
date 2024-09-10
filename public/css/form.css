@@ -73,7 +73,7 @@
   text-indent: var(--pd-04);
 }
 
-.form-control input:focus ,
+.form-control input:focus,
 .form-control select:focus {
   border-color: var(--clr-primary);
   background-color: var(--clr-white);
@@ -128,4 +128,36 @@ div.bottom-nav .link {
 
 .a-button:hover {
   text-decoration: underline;
+}
+
+.cancel-button,
+.add-button {
+  padding: 10px 30px;
+  border-radius: 30px;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cancel-button {
+  background-color: #ff6f61;
+  color: #fff;
+}
+
+.add-button {
+  background-color: #1e3c72;
+  color: #ffcc70;
+  border: 2px solid #ffcc70;
+}
+
+.cancel-button:hover,
+.add-button:hover {
+  transform: translateY(-5px);
+}
+
+.add-button:hover {
+  background-color: #ffcc70;
+  color: #1e3c72;
 }
