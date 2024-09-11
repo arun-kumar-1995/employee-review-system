@@ -9,7 +9,8 @@ import {
   createSession,
   addEmployee,
   editEmployee,
-  updateEmployee
+  updateEmployee,
+  destroySession,
 } from "../controllers/user.controller.js";
 import {
   adminDashboard,
@@ -24,7 +25,8 @@ router.route("/sign-up").get(signUp);
 router.route("/admin-dashboard").get(adminDashboard);
 router.route("/employee-dashboard/:id").get(employeeDashboard);
 router.route("/add-employee").get(addEmployee);
-router.route('/edit-employee/:id').get(editEmployee);
-router.route('/update-employee/:id').post(updateEmployee);
+router.route("/edit-employee/:id").get(editEmployee);
+router.route("/update-employee/:id").post(updateEmployee);
+router.route("/sign-out").get(destroySession);
 
 export default router;

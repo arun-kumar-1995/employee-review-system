@@ -117,3 +117,12 @@ export const updateEmployee = CatchAsyncError(async (req, res, next) => {
   if (!user) return new ApiResponse(res, false, 400, "User not found");
   return new ApiResponse(res, true, 200, "User updated");
 });
+
+// destroy session
+export const destroySession = CatchAsyncError(async (req, res, next) => {
+  res.cookie("myCookie", null, {
+    httpOnly: true,
+  });
+
+  return new ApiResponse(res, true, 200, "You are logged out");
+});
