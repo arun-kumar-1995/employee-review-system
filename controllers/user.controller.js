@@ -113,7 +113,7 @@ export const updateEmployee = CatchAsyncError(async (req, res, next) => {
     { new: true, upsert: true }
   );
   if (!user) return new ApiResponse(res, false, 400, "User not found");
-  return new ApiResponse(res, true, 200, "User updated");
+  return new ApiResponse(res, true, 200, "User updated", {user}, "/admin-dashboard");
 });
 
 // destroy session
