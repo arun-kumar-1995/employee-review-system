@@ -1,0 +1,10 @@
+.flash-modal {
+  position: absolute;
+  top: 10vh;
+  right: 2rem;
+  display: none;
+}
+
+.flash-modal.show {
+  display: block;
+}
