@@ -4,9 +4,7 @@ import getSignInToken from "../helpers/GetSignInToken.js";
 import User from "../models/user.models.js";
 
 export const signIn = CatchAsyncError(async (req, res, next) => {
-  console.log(req.isAuthenticated());
-  console.log(req.userRole);
-
+ 
   if (req.isAuthenticated()) {
     if (req.userRole === "admin") {
       return res.redirect("/admin-dashboard");
@@ -123,6 +121,6 @@ export const destroySession = CatchAsyncError(async (req, res, next) => {
   res.cookie("myCookie", null, {
     httpOnly: true,
   });
-
+  res.redirect('/');
   return new ApiResponse(res, true, 200, "You are logged out");
 });
