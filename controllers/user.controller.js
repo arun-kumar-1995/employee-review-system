@@ -92,3 +92,28 @@ export const addEmployee = (req, res) => {
   }
   return res.redirect("/");
 };
+
+export const editEmployee = CatchAsyncError(async (req, res, next) => {
+  if (req.isAuthenticated()) {
+    if (req.user.role === "admin") {
+      const employee = await User.findById(req.params.id);
+      return res.render("editEmployee", {
+        title: "Edit Employee",
+        employee,
+      });
+    }
+  } else {
+    return res.redirect("/");
+  }
+});
+
+export const updateEmployee = CatchAsyncError(async (req, res, next) => {
+  const { username, email } = req.body;
+  const user = await User.findByIdAndUpdate(
+    req.params.id,
+    { $set: { email, username } },
+    { new: true, upsert: true }
+  );
+  if (!user) return new ApiResponse(res, false, 400, "User not found");
+  return new ApiResponse(res, true, 200, "User updated");
+});
