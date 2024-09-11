@@ -1,3 +1,8 @@
+// flash message
+const flashMessageModal = document.getElementById("flash-modal");
+const flashModalContent = document.getElementById("modalContent");
+const flashModalClose = document.getElementById("modalCloseBtn");
+
 document.addEventListener("DOMContentLoaded", handleFormSubmit);
 
 function handleFormSubmit() {
@@ -35,5 +40,29 @@ function handleFormSubmit() {
 function displayFlashMessage(data) {
   const flashMessage = data.message;
   const status = data.status;
-  console.log(flashMessage);
+
+  //display flash modal
+  flashMessageModal.classList.add("show");
+  flashModalContent.classList.add("display");
+
+  flashModalContent.children[1].textContent = flashMessage;
+
+  if (status === true) {
+    flashModalContent.children[0].innerHTML = `<i class="fas fa-check-circle success"></i>`;
+    flashModalContent.style.borderLeft = "5px solid #28a745";
+  }
+  if (status === false) {
+    flashModalContent.children[0].innerHTML = `<i class="fas fa-exclamation-circle error"></i>`;
+    flashModalContent.style.borderLeft = "5px solid #dc3545";
+  }
+
+  setTimeout(hideFlashMessage, 2000);
 }
+
+function hideFlashMessage() {
+  flashMessageModal.classList.remove("show");
+  flashModalContent.classList.remove("display");
+}
+
+//close flash message modal
+flashModalClose.addEventListener("click", hideFlashMessage);

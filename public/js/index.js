@@ -2,6 +2,8 @@ document.getElementById("hamburger").addEventListener("click", function () {
   this.classList.toggle("open");
 });
 
+
+
 //edit modal
 const editModal = document.getElementById("editModal");
 const editButtons = document.querySelectorAll(".edit-btn");
