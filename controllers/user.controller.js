@@ -4,7 +4,6 @@ import getSignInToken from "../helpers/GetSignInToken.js";
 import User from "../models/user.models.js";
 
 export const signIn = CatchAsyncError(async (req, res, next) => {
- 
   if (req.isAuthenticated()) {
     if (req.userRole === "admin") {
       return res.redirect("/admin-dashboard");
@@ -26,24 +25,22 @@ export const signUp = async (req, res, next) => {
 };
 
 export const create = async (req, res, next) => {
-  const { username, password, confirmPassword, email, role } = req.body;
-  console.log(req.body);
-
-  const user = await User.findOne({ email });
+  const { username, password, confirm_password, email, role } = req.body;
+  let user = await User.findOne({ email });
   if (user) return new ApiResponse(res, false, 400, "User already exists");
 
-  if (password !== confirmPassword)
+  if (password !== confirm_password)
     return new ApiResponse(res, false, 400, "Passwords do not match");
 
   // create user
-  await User.create({
+  user = await User.create({
     username,
     email,
     password,
     role,
   });
 
-  return new ApiResponse(res, true, 201, "User created");
+  return new ApiResponse(res, true, 201, "User created", { user }, "/");
 };
 
 export const createSession = CatchAsyncError(async (req, res, next) => {
@@ -72,11 +69,14 @@ export const createSession = CatchAsyncError(async (req, res, next) => {
   // create cookie
   res.cookie(
     "_session",
-    JSON.stringify({ token, user: { role: user.role, id: user._id } }),
+    JSON.stringify({
+      token,
+      user: { role: user.role, id: user._id, username: user.username },
+    }),
     cookie_options
   );
 
-  return new ApiResponse(res, true, 200, "You are logged in", { token });
+  return new ApiResponse(res, true, 200, "You are logged in", { token }, "/");
 });
 
 // Render add employee page
@@ -121,6 +121,6 @@ export const destroySession = CatchAsyncError(async (req, res, next) => {
   res.cookie("myCookie", null, {
     httpOnly: true,
   });
-  res.redirect('/');
+  res.redirect("/");
   return new ApiResponse(res, true, 200, "You are logged out");
 });

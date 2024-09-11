@@ -57,6 +57,7 @@ function displayFlashMessage(data) {
   }
 
   setTimeout(hideFlashMessage, 2000);
+  if (data.redirectUrl) window.location.href = data.redirectUrl;
 }
 
 function hideFlashMessage() {
