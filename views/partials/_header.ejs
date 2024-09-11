@@ -5,8 +5,7 @@
     <img src="/assets/brand-logo.png" alt="Company Logo" class="image-logo" />
     <p>Review System</p>
   </a>
-
-  <% if(locals.user) {%>
+  <% if(user) {%>
   <nav>
     <div class="hamburger" id="hamburger">
       <span class="line"></span>
@@ -20,10 +19,10 @@
       <li>
         <!-- Greetings Section -->
         <div class="logged-in user-info">
-          <h1>Welcome , <span>Arun Kumar</span></h1>
+          <h1>Welcome , <span><%= user.username %></span></h1>
         </div>
       </li>
-      <% if(locals.user.role === 'admin') {%>
+      <% if(user.role === 'admin') {%>
       <li class="nav-control">
         <a class="btn add-employee-btn" href="/add-employee">Add Employee</a>
       </li>

@@ -150,6 +150,9 @@ nav ul li button {
 nav li div.logged-in {
   margin-right: var(--mg-3);
 }
+nav li div.logged-in h1 {
+  text-transform: capitalize;
+}
 
 li button.signout-btn {
   background-color: var(--clr-orange-red);
