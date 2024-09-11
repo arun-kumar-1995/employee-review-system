@@ -5,7 +5,7 @@ import User from "../models/user.models.js";
 
 export const signIn = CatchAsyncError(async (req, res, next) => {
   if (req.isAuthenticated()) {
-    if (req.userRole === "admin") {
+    if (req.user.role === "admin") {
       return res.redirect("/admin-dashboard");
     }
     // if user is not admin

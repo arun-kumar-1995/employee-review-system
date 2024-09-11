@@ -15,25 +15,28 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John Doe</td>
-        <td>john.doe@example.com</td>
-        <td>Employee</td>
-        <td>
-          <button class="btn edit-btn"><i class="fas fa-edit"></i> Edit</button>
-          </td>
+      <% for (user of users) {%>
+        <tr>
+          <td><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td><%= user.role %></td>
           <td>
-            <button class="btn delete-btn">
-              <i class="fas fa-trash-alt"></i> Delete
-            </button>
+            <button class="btn edit-btn" data-id="<%= user._id%>"><i class="fas fa-edit"></i> Edit</button>
+            </td>
+            <td>
+              <button class="btn delete-btn">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </td>
+            <td>
+              <button class="btn review-btn">
+                <i class="fas fa-tasks"></i> Assign Review
+              </button>
+            </td>
           </td>
-          <td>
-            <button class="btn review-btn">
-              <i class="fas fa-tasks"></i> Assign Review
-            </button>
-          </td>
-        </td>
-      </tr>
+        </tr>
+
+        <%}%>
     
     </tbody>
   </table>
