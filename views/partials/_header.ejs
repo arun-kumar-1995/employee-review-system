@@ -5,7 +5,7 @@
     <img src="/assets/brand-logo.png" alt="Company Logo" class="image-logo" />
     <p>Review System</p>
   </a>
-  <% if(locals.user) {%>
+  <% if(user) {%>
   <nav>
     <div class="hamburger" id="hamburger">
       <span class="line"></span>
@@ -28,7 +28,7 @@
       </li>
       <%}%>
       <li class="nav-control">
-        <form action="/sign-out" method="POST">
+        <form action="/sign-out" method="POST" class="form">
           <button type="submit" class="btn signout-btn">Sign Out</button>
         </form>
       </li>
