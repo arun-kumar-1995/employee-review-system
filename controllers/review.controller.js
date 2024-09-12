@@ -1,27 +1,28 @@
-import ApiResponse from "../helpers/ApiResponse";
+import ApiResponse from "../helpers/ApiResponse.js";
 import CatchAsyncError from "../middlewares/CatchAsyncError.js";
 import Review from "../models/review.models.js";
 
 export const assignReview = CatchAsyncError(async (req, rex, next) => {
   const { recipient_email } = req.body;
-
+  console.log(req.user);
+  console.log(req.params.id);
   const [reviewer, recipient] = await Promise.all([
     await User.findById(req.params.id),
-    await User.findOne({ email: recipient_email }),
+    await User.findById(req.user._id),
   ]);
 
-  const alreadyAssigned = reviewer.assignedReviews.filter(
-    (userId) => userId == recipient.id
-  );
+  //   const alreadyAssigned = reviewer.assignedReviews.filter(
+  //     (userId) => userId == recipient.id
+  //   );
 
-  if (alreadyAssigned.length > 0)
-    return new ApiResponse(res, false, 400, "Review already assigned");
+  //   if (alreadyAssigned.length > 0)
+  //     return new ApiResponse(res, false, 400, "Review already assigned");
 
-  await reviewer.updateOne({
-    $push: { assignedReviews: recipient },
-  });
+  //   await reviewer.updateOne({
+  //     $push: { assignedReviews: recipient },
+  //   });
 
-  return new ApiResponse(res, false, 200, "Review assigned");
+  //   return new ApiResponse(res, false, 200, "Review assigned");
 });
 
 export const submitReview = CatchAsyncError(async (req, res, next) => {

@@ -1,5 +1,10 @@
 import express from "express";
 const router = express.Router();
+import {
+  assignReview,
+  submitReview,
+  updateReview,
+} from "../controllers/review.controller.js";
 
 // define review routes
 
