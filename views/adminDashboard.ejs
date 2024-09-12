@@ -26,11 +26,14 @@
             class="btn edit-btn" data-id="<%= user._id%>"><i class="fas fa-edit"></i> Edit</a>
             </td>
             <td>
-              <a 
-              href="/destroy/<%= user._id %>"
-              class="btn delete-btn">
-                <i class="fas fa-trash-alt"></i> Delete
-              </a>
+              <form action="/destroy/<%= user._id %>" method="POST" class="form"
+                style="margin:0; padding: 0;"
+                >
+                <button type="submit" 
+                class="btn delete-btn">
+                  <i class="fas fa-trash-alt"></i> Delete
+                </button>
+                </form>
             </td>
             <td>
               <form action="/review/assign-review/<%= user._id %>" method="POST" class="form"
