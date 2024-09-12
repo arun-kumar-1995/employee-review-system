@@ -125,7 +125,7 @@ export const updateEmployee = CatchAsyncError(async (req, res, next) => {
 
 // destroy session
 export const destroySession = CatchAsyncError(async (req, res, next) => {
-  res.cookie("_session", null, {
+  res.cookie("_session", "", {
     httpOnly: true,
   });
 
