@@ -154,13 +154,13 @@ nav li div.logged-in h1 {
   text-transform: capitalize;
 }
 
-li button.signout-btn {
+li a.signout-btn {
   background-color: var(--clr-orange-red);
   color: var(--clr-white);
   border-radius: var(--pd-1-2);
 }
 
-li button.signout-btn:hover {
+li a.signout-btn:hover {
   background: transparent;
   outline: 2px solid var(--clr-orange-red);
   color: var(--clr-text-light);

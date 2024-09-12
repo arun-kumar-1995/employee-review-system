@@ -113,14 +113,21 @@ export const updateEmployee = CatchAsyncError(async (req, res, next) => {
     { new: true, upsert: true }
   );
   if (!user) return new ApiResponse(res, false, 400, "User not found");
-  return new ApiResponse(res, true, 200, "User updated", {user}, "/admin-dashboard");
+  return new ApiResponse(
+    res,
+    true,
+    200,
+    "User updated",
+    { user },
+    "/admin-dashboard"
+  );
 });
 
 // destroy session
 export const destroySession = CatchAsyncError(async (req, res, next) => {
-  res.cookie("myCookie", null, {
+  res.cookie("_session", null, {
     httpOnly: true,
   });
-  res.redirect("/");
-  return new ApiResponse(res, true, 200, "You are logged out");
+
+  return new ApiResponse(res, true, 200, "You are logged out", "", "/");
 });

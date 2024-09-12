@@ -27,6 +27,6 @@ router.route("/employee-dashboard/:id").get(employeeDashboard);
 router.route("/add-employee").get(addEmployee);
 router.route("/edit-employee/:id").get(editEmployee);
 router.route("/update-employee/:id").post(updateEmployee);
-router.route("/sign-out").get(destroySession);
+router.route("/sign-out").post(destroySession);
 
 export default router;
