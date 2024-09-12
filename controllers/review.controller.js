@@ -28,27 +28,39 @@ export const assignReview = CatchAsyncError(async (req, res, next) => {
 });
 
 export const submitReview = CatchAsyncError(async (req, res, next) => {
-  const { recipient_email, feedback } = req.body;
-  if (!feedback)
-    return new ApiResponse(res, false, 400, "Feedback is required");
-  const trimmedFeedback = feedback.trim();
+  if (req.isAuthenticated()) {
+    const { recipient_email, feedback } = req.body;
+    if (!feedback)
+      return new ApiResponse(res, false, 400, "Feedback is required");
+    const trimmedFeedback = feedback.trim();
 
-  const [recipient, reviewer] = await Promise.all([
-    User.findOne({ email: recipient_email }),
-    User.findById(req.params.id),
-  ]);
+    const [recipient, reviewer] = await Promise.all([
+      User.findOne({ email: recipient_email }),
+      User.findById(req.params.id),
+    ]);
 
-  // Create the new review
-  const review = await Review.create({
-    review: trimmedFeedback,
-    reviewer,
-    recipient,
-  });
+    // Create the new review
+    const review = await Review.create({
+      review: trimmedFeedback,
+      reviewer,
+      recipient,
+    });
 
-  await Promise.all([
-    recipient.updateOne({ $addToSet: { reviewsFromOthers: review } }),
-    reviewer.updateOne({ $pull: { assignedReviews: recipient.id } }),
-  ]);
+    await Promise.all([
+      recipient.updateOne({ $addToSet: { reviewsFromOthers: review } }),
+      reviewer.updateOne({ $pull: { assignedReviews: recipient.id } }),
+    ]);
+    return new ApiResponse(
+      res,
+      true,
+      200,
+      "Review submitted successfully!",
+      { review },
+      "/"
+    );
+  } else {
+    return res.redirect("/");
+  }
 });
 
 export const updateReview = CatchAsyncError(async (req, res, next) => {

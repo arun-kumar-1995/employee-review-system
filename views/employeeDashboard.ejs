@@ -7,54 +7,61 @@
   <!-- Assigned Reviews Section -->
   <div class="section-card" id="assigned-reviews">
     <h2>Assigned Reviews</h2>
+    <% if(assignedReviews.length > 0){%>
     <ul class="review-list">
+      <% for(review of assignedReviews) {%>
       <li class="review-item">
-        <div class="info">
-          <p><strong>User:</strong> john.doe@example.com</p>
-        </div>
-        <div class="feedback-form">
-          <textarea rows="3" placeholder="Provide feedback..."></textarea>
-          <button type="button">Submit Feedback</button>
-        </div>
+        <form
+          action="/review/create/<%=employee._id%>"
+          class="form"
+          method="POST"
+        >
+          <div class="info">
+            <p><strong>User:</strong><%= review.email %></p>
+          </div>
+          <input
+            type="text"
+            style="display: none"
+            name="recipient_email"
+            value="<%= review.email %>"
+          />
+          <div class="feedback-form">
+            <textarea
+              rows="4"
+              cols="50"
+              placeholder="Write feedback..."
+              style="width: 100%"
+              name="feedback"
+            ></textarea>
+            <button type="submit">Submit Feedback</button>
+          </div>
+        </form>
       </li>
-      <li class="review-item">
-        <div class="info">
-          <p><strong>User:</strong> jane.smith@example.com</p>
-        </div>
-        <div class="feedback-form">
-          <textarea rows="3" placeholder="Provide feedback..."></textarea>
-          <button type="button">Submit Feedback</button>
-        </div>
-      </li>
+      <%}%>
     </ul>
+    <%} else {%>
+    <div>No Assign review found</div>
+    <%}%>
   </div>
 
   <!-- Reviews Given by Others Section -->
   <div class="section-card" id="reviews-given">
     <h2>Reviews Given by Others</h2>
+    <% if(reviewsFromOthers.length > 0){%>
     <ul class="review-list">
+      <% for (review of reviewsFromOthers) {%>
       <li class="review-item">
         <div class="info">
-          <p><strong>Email:</strong> reviewer1@example.com</p>
+          <p><strong>Email:</strong> <%= review.reviewer.email %></p>
           <div class="feedback-content">
-            <p>
-              This is the feedback from reviewer1 regarding your performance.
-              Keep up the good work!
-            </p>
+            <p><%= review.review %></p>
           </div>
         </div>
       </li>
-      <li class="review-item">
-        <div class="info">
-          <p><strong>Email:</strong> reviewer2@example.com</p>
-          <div class="feedback-content">
-            <p>
-              This is another feedback from reviewer2. You need to improve your
-              communication skills.
-            </p>
-          </div>
-        </div>
-      </li>
+      <%}%>
     </ul>
+    <%} else {%>
+    <div style="font-size: 1.32rem">No review found</div>
+    <%}%>
   </div>
 </div>
